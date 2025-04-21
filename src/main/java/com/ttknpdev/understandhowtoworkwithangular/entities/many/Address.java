@@ -10,7 +10,6 @@ import lombok.*;
 @Getter
 @Setter
 
-
 @Entity
 @Table(name = "addresses")
 public class Address {
@@ -18,13 +17,13 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "aid")
     private Long _aid;
-    /*
-    -- the @JoinColumn annotation to specify the foreign key column (eid).
-    -- If you don’t provide the JoinColumn name, the name will be set automatically.
-    -- @JsonIgnore is used to ignore the logical property used in serialization and deserialization.
+    /**
+       the @JoinColumn annotation to specify the foreign key column (eid).
+       If you don’t provide the JoinColumn name, the name will be set automatically.
     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "eid")
+    // @JsonIgnore is used to ignore the logical property used in serialization and deserialization.
     @JsonIgnore
     private Employee employee; // for create
     @Column(name = "city")
@@ -34,20 +33,14 @@ public class Address {
     @Column(name = "details")
     private String _details;
 
-    public Address(Long aid, String city, String country, String details) {
-        this._aid = aid;
-        this._city = city;
-        this._country = country;
-        this._details = details;
-    }
 
     @Override
     public String toString() {
         return "Address{" +
-                "_aid=" + _aid +
-                ", _city='" + _city + '\'' +
-                ", _country='" + _country + '\'' +
-                ", _details='" + _details + '\'' +
+                "aid=" + _aid +
+                ", city='" + _city + '\'' +
+                ", country='" + _country + '\'' +
+                ", details='" + _details + '\'' +
                 '}';
     }
 }

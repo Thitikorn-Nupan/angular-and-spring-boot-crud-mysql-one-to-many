@@ -12,17 +12,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api/address")
 public class EndPointAddress {
-    private ServiceAddress<Address> serviceAddress;
+
+    private final ServiceAddress<Address> serviceAddress;
+
     @Autowired
     public EndPointAddress(ServiceAddress<Address> serviceAddress) {
-
         this.serviceAddress = serviceAddress;
-
     }
+
     @GetMapping(value = "/reads")
     private ResponseEntity<?> reads() {
         Iterable<Address> addresses = serviceAddress.reads();
-        // System.out.println(addresses);
         Logging.endpointAddress.warn("endpoint \"/reads\" is calling");
         return ResponseEntity
                 .accepted()
@@ -30,8 +30,6 @@ public class EndPointAddress {
     }
     @GetMapping(value = "/read/{aid}")
     private ResponseEntity<?> read(@PathVariable Long aid) {
-        // Iterable<Address> addresses = serviceAddress.reads();
-        // System.out.println(addresses);
         Logging.endpointAddress.warn("endpoint \"/read/aid\" is calling");
         return ResponseEntity
                 .accepted()
@@ -39,8 +37,6 @@ public class EndPointAddress {
     }
     @DeleteMapping(value = "/delete/{aid}")
     private ResponseEntity<?> delete(@PathVariable Long aid) {
-        // Iterable<Address> addresses = serviceAddress.reads();
-        // System.out.println(addresses);
         Logging.endpointAddress.warn("endpoint \"/delete/aid\" is calling");
         return ResponseEntity
                 .ok()
@@ -49,10 +45,6 @@ public class EndPointAddress {
     @PostMapping(value = "/create/{eid}")
     private ResponseEntity<?> create (@RequestBody Address address , @PathVariable Long eid) {
         Logging.endpointAddress.warn("endpoint \"/create/eid\" is calling");
-         System.out.println(eid);
-        Logging.endpointAddress.warn(address.toString());
-        // Logging.endpointAddress.warn(address.getEmployee());
-        // Logging.endpointAddress.warn(eid.toString());
         return ResponseEntity
                 .accepted()
                 .body(serviceAddress.create(address,eid));
@@ -61,15 +53,10 @@ public class EndPointAddress {
 
     @PutMapping(value = "/update")
     private ResponseEntity<?> update (@RequestBody Address address) {
-        Logging.endpointAddress.warn("endpoint \"/create/eid\" is calling");
-        // System.out.println(eid);
-        Logging.endpointAddress.warn(address.toString());
-        // Logging.endpointAddress.warn(address.getEmployee());
-        // Logging.endpointAddress.warn(eid.toString());
+        Logging.endpointAddress.warn("endpoint \"/update\" is calling");
         return ResponseEntity
                 .accepted()
                 .body(serviceAddress.update(address,address.get_aid()));
-        // return null;
     }
 
 

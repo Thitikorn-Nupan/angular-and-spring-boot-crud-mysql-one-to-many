@@ -11,17 +11,17 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api/employee")
 public class EndPointEmployee {
-    private ServiceEmployee<Employee> serviceEmployee;
+
+    private final ServiceEmployee<Employee> serviceEmployee;
+
     @Autowired
     public EndPointEmployee(ServiceEmployee<Employee> serviceEmployee) {
-
         this.serviceEmployee = serviceEmployee;
-
     }
+
     @GetMapping(value = "/reads")
     private ResponseEntity<?> reads() {
         Iterable<Employee> employees = serviceEmployee.reads();
-        // System.out.println(employees); // [Employee(eid=1000, fullname=peter parker, age=32, position=Software Developers, salary=50000.0, addresses=[Address{aid=1, city='Bangkok', country='Thailand', details='225/9 Soi Thonglor 10, Sukhumvit Road'}, Address{aid=2, city='Bangkok', country='Thailand', details='979/451 Future Ristic Condo, Siriphong Road'}]), Employee(eid=1001, fullname=adam ryder, age=30, position=Data Developers, salary=30000.0, addresses=[])]
         Logging.endpointEmployee.warn("endpoint \"/reads\" is calling");
         return ResponseEntity
                 .accepted()
@@ -60,7 +60,6 @@ public class EndPointEmployee {
     @PutMapping(value = "/update/{eid}")
     private ResponseEntity<?> update(@RequestBody Employee employee,@PathVariable Long eid) {
         Logging.endpointEmployee.warn("endpoint \"/update/{eid}\" is calling");
-        // Logging.endpointEmployee.warn("employee - {}",employee);
         return ResponseEntity
                 .ok(serviceEmployee.update(employee,eid));
     }

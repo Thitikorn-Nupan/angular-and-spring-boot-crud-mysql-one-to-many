@@ -16,14 +16,13 @@ import java.util.Map;
 
 @Service
 public class DaoEmployee implements ServiceEmployee<Employee> {
-    private RepositoryEmployee repositoryEmployee;
-    private RepositoryAddress repositoryAddress;
+    private final RepositoryEmployee repositoryEmployee;
+    private final RepositoryAddress repositoryAddress;
+
     @Autowired
     public DaoEmployee(RepositoryEmployee repositoryEmployee ,  RepositoryAddress repositoryAddress ) {
-
         this.repositoryEmployee = repositoryEmployee;
         this.repositoryAddress = repositoryAddress;
-
     }
 
     @Override
@@ -39,19 +38,18 @@ public class DaoEmployee implements ServiceEmployee<Employee> {
             employee.set_addresses(null);
             modify.add(employee);
         }
-        // System.out.println(modify); [Employee(eid=1000, fullname=peter parker, age=32, position=Software Developers, salary=50000.0, addresses=null), Employee(eid=1001, fullname=adam ryder, age=30, position=Data Developers, salary=30000.0, addresses=null), Employee(eid=1003, fullname=alex sandler, age=29, position=IT Support, salary=27000.0, addresses=null)]
         return modify;
     }
 
     @Override
     public Employee read(Long eid) {
         Employee employee = new Employee();
-        repositoryEmployee.findById(eid).ifPresent(found -> {
-            employee.set_eid(found.get_eid());
-            employee.set_fullname(found.get_fullname());
-            employee.set_age(found.get_age());
-            employee.set_position(found.get_position());
-            employee.set_salary(found.get_salary());
+        repositoryEmployee.findById(eid).ifPresent(employeePresent -> {
+            employee.set_eid(employeePresent.get_eid());
+            employee.set_fullname(employeePresent.get_fullname());
+            employee.set_age(employeePresent.get_age());
+            employee.set_position(employeePresent.get_position());
+            employee.set_salary(employeePresent.get_salary());
         });
         return employee;
     }
@@ -64,17 +62,15 @@ public class DaoEmployee implements ServiceEmployee<Employee> {
     @Override
     public Map<String, Boolean> delete(Long eid) {
         Map<String,Boolean> response = new HashMap<>();
-        response.put("data",false);
         repositoryEmployee.findById(eid).ifPresent(employee -> {
-            // System.out.println("found eid");
             List< Address> addresses  = (List<Address>) repositoryAddress.readsAddressesByFK(eid);
-                if (addresses.size() == 0) {
-                    Logging.daoEmployee.info("can delete");
+                if (addresses.isEmpty()) {
                     repositoryEmployee.delete(employee);
                     response.put("data",true);
+                    Logging.daoEmployee.info("deleted employee");
                 }
                 else {
-                    // System.out.println("can not delete");
+                    Logging.daoEmployee.info("delete employee failed");
                     response.put("data",false);
                 }
         });
@@ -85,8 +81,6 @@ public class DaoEmployee implements ServiceEmployee<Employee> {
     public Map<String, Boolean> update(Employee obj, Long eid) {
         Map<String,Boolean> response = new HashMap<>();
         response.put("data",false);
-        Logging.daoEmployee.warn("employee - {}",obj);
-        // System.out.println("cannot update");
         repositoryEmployee.findById(eid).ifPresent(employee -> {
             employee.set_fullname(obj.get_fullname());
             employee.set_age(obj.get_age());
@@ -98,4 +92,5 @@ public class DaoEmployee implements ServiceEmployee<Employee> {
         });
         return response;
     }
+
 }

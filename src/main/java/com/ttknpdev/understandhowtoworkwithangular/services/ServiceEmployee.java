@@ -3,7 +3,7 @@ package com.ttknpdev.understandhowtoworkwithangular.services;
 import java.util.List;
 import java.util.Map;
 
-public interface ServiceEmployee<T>{
+public interface ServiceEmployee<T> {
     Iterable<T> reads();
     List<T> readsOnlyEmployee();
     T create(T obj);
