@@ -7,15 +7,31 @@ import {EmployeeFormCreateComponent} from "./components/employee-form-create/emp
 import {EmployeeFormEditComponent} from "./components/employee-form-edit/employee-form-edit.component";
 import {AddressFormCreateComponent} from "./components/address-form-create/address-form-create.component";
 import {AddressFormEditComponent} from "./components/address-form-edit/address-form-edit.component";
+import {
+  EmployeeListWithDataTableComponent
+} from "./components/employee-list-with-data-table/employee-list-with-data-table.component";
+import {
+  AddressListWithDataTableComponent
+} from "./components/address-list-with-data-table/address-list-with-data-table.component";
+import {
+  EmployeeFormCreateWithDataFormComponent
+} from "./components/employee-form-create-with-data-form/employee-form-create-with-data-form.component";
+import {
+  AddressFormCreateWithDataFormComponent
+} from "./components/address-form-create-with-data-form/address-form-create-with-data-form.component";
 
 const routes: Routes = [
   {path:'both/list' , component:BothListComponent},
-  {path:'employee/list' , component:EmployeeListComponent},
-  {path:'employee/form-create' , component:EmployeeFormCreateComponent},
-  {path:'address/form-create' , component:AddressFormCreateComponent},
+  // {path:'employee/list' , component:EmployeeListComponent}, // old way
+  {path:'employee/list' , component:EmployeeListWithDataTableComponent}, // new way
+  // {path:'employee/form-create' , component:EmployeeFormCreateComponent}, // old way
+  {path:'employee/form-create' , component:EmployeeFormCreateWithDataFormComponent}, // old way
+  // {path:'address/form-create' , component:AddressFormCreateComponent}, // old way
+  {path:'address/form-create' , component:AddressFormCreateWithDataFormComponent}, // new way
   {path:'employee/editing/:eid' , component:EmployeeFormEditComponent},
   {path:'address/editing/:aid' , component:AddressFormEditComponent},
-  {path:'address/list' , component:AddressListComponent}
+  //  {path:'address/list' , component:AddressListComponent} ,// old way
+  {path:'address/list' , component:AddressListWithDataTableComponent} // old way
 ];
 
 @NgModule({

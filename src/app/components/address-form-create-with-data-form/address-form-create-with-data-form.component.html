@@ -1,0 +1,8 @@
+<ng-container *ngIf="inputDynamicFieldsMain">
+  <data-form
+    [titleForm]="titleFormMain"
+    [inputDynamicFields]="inputDynamicFieldsMain"
+    [formGroup]="formGroupMain"
+    (getFormGroupMain)="setFormGroupMain($event)">
+  </data-form>
+</ng-container>

@@ -7,10 +7,16 @@ import { AddressListComponent } from './components/address-list/address-list.com
 import { BothListComponent } from './components/both-list/both-list.component';
 import {HttpClientModule} from "@angular/common/http";
 import { EmployeeFormCreateComponent } from './components/employee-form-create/employee-form-create.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { EmployeeFormEditComponent } from './components/employee-form-edit/employee-form-edit.component';
 import { AddressFormCreateComponent } from './components/address-form-create/address-form-create.component';
 import { AddressFormEditComponent } from './components/address-form-edit/address-form-edit.component';
+import { DataTableComponent } from './components/data-table/data-table.component';
+import { EmployeeListWithDataTableComponent } from './components/employee-list-with-data-table/employee-list-with-data-table.component';
+import { AddressListWithDataTableComponent } from './components/address-list-with-data-table/address-list-with-data-table.component';
+import { DataFormComponent } from './components/data-form/data-form.component';
+import { EmployeeFormCreateWithDataFormComponent } from './components/employee-form-create-with-data-form/employee-form-create-with-data-form.component';
+import { AddressFormCreateWithDataFormComponent } from './components/address-form-create-with-data-form/address-form-create-with-data-form.component';
 
 @NgModule({
   declarations: [
@@ -21,13 +27,20 @@ import { AddressFormEditComponent } from './components/address-form-edit/address
     EmployeeFormCreateComponent,
     EmployeeFormEditComponent,
     AddressFormCreateComponent,
-    AddressFormEditComponent
+    AddressFormEditComponent,
+    DataTableComponent,
+    EmployeeListWithDataTableComponent,
+    AddressListWithDataTableComponent,
+    DataFormComponent,
+    EmployeeFormCreateWithDataFormComponent,
+    AddressFormCreateWithDataFormComponent
   ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]

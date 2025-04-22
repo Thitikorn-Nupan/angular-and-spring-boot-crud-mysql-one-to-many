@@ -1,0 +1,10 @@
+<div>
+  <data-table
+    [dataHeaders]="['EID', 'Fullname', 'Age', 'Position','Salary']"
+    [dataBody]="employees"
+    [dataBodyKeys]="employeesKey"
+    [titleTable]="'Employees List'"
+    (dataEdit)="setDataEdit($event)"
+    (dataRemove)="setDataRemove($event)">
+  </data-table>
+</div>

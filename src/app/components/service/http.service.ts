@@ -9,10 +9,11 @@ import {Address} from "../../entities/address";
 export class HttpService {
   private readonly EMPLOYEE_REST : string = 'http://localhost:8080/api/employee'; // my base api I build
   private readonly ADDRESS_REST : string = 'http://localhost:8080/api/address'; // my base api I build
-  private httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');  // use when send url + arg !!
+  private httpHeaders : HttpHeaders  // use when send url + parameter !!
   private httpClient : HttpClient
   constructor(httpClient : HttpClient) {
     this.httpClient = httpClient;
+    this.httpHeaders = new HttpHeaders().set('Content-Type', 'application/json')
   }
   readsEmployees() : Observable<Employee[]> {
     // return json text from my rest api

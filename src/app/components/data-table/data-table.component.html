@@ -1,0 +1,45 @@
+<div class="container" style="margin: 0 auto;">
+
+  <h2 class="text-center p-4 mt-4">{{titleTable}}</h2>
+
+  <table class="table">
+
+    <thead class="table-dark">
+    <tr>
+      <ng-container *ngFor="let dataHeader of dataHeaders">
+        <th scope="col">{{dataHeader}}</th>
+      </ng-container>
+      <th class="text-center" scope="col">Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+      <ng-container *ngFor="let data of dataBody let i = index;"> <!-- data as object -->
+        <tr>
+          <ng-container *ngFor="let key of dataBodyKeys; "> <!-- key for data[key] ex, data['fullname'],... -->
+            <ng-container *ngIf="data[key] !== null">
+              <td>{{data[key]}}</td>
+            </ng-container>
+          </ng-container>
+          <td class="text-center">
+            <button class="btn btn-sm btn-dark p-2 m-lg-1" (click)="onEditClick(data)">Edit</button>
+            <button class="btn btn-sm btn-warning p-2" (click)="onRemoveClick(data)">Delete</button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+
+    <tfoot>
+    <ng-container *ngIf="dataHeaders && dataBody">
+      <tr>
+        <td [colSpan]="dataHeaders.length"></td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-danger p-2" >Delete All</button>
+        </td>
+      </tr>
+    </ng-container>
+    </tfoot>
+
+  </table>
+
+</div>

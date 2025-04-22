@@ -1,4 +1,4 @@
-/*
+
 import {Employee} from "../entities/employee";
 import {Address} from "../entities/address";
 
@@ -16,12 +16,12 @@ let a4 : Address = new Address("TH","Bang Bon","125/451 Futuristic Condo, Sirich
 
 
 
-let e4 : EmployeeHasAddresses = new EmployeeHasAddresses("kevin",22,"node.js back-end",25000.00, addresses)
-let e5 : EmployeeHasAddresses = new EmployeeHasAddresses("peter",25,"java back-end",40000.00, null)
-let e6 : EmployeeHasAddresses = new EmployeeHasAddresses("smite",22,"node.js back-end",22000.00, null)
-let e7 : EmployeeHasAddresses = new EmployeeHasAddresses("adam",27,"angular front-end",22000.00, addresses2)
-let e8 : EmployeeHasAddresses = new EmployeeHasAddresses("mark",21,"react front-end",22000.00, null)*!/
-
+// let e4 : EmployeeHasAddresses = new EmployeeHasAddresses("kevin",22,"node.js back-end",25000.00, addresses)
+// let e5 : EmployeeHasAddresses = new EmployeeHasAddresses("peter",25,"java back-end",40000.00, null)
+// let e6 : EmployeeHasAddresses = new EmployeeHasAddresses("smite",22,"node.js back-end",22000.00, null)
+// let e7 : EmployeeHasAddresses = new EmployeeHasAddresses("adam",27,"angular front-end",22000.00, addresses2)
+// let e8 : EmployeeHasAddresses = new EmployeeHasAddresses("mark",21,"react front-end",22000.00, null)*!/
+//
 // let employeeHasAddressesList = new Array<EmployeeHasAddresses>()
 // employeeHasAddressesList.push(e4);
 // employeeHasAddressesList.push(e5);
@@ -34,13 +34,20 @@ employees.push(e1)
 employees.push(e2)
 employees.push(e3)
 
+let addresses = new Array<Address>()
+addresses.push(a1)
+addresses.push(a2)
+addresses.push(a3)
+addresses.push(a4)
+
+
 const demo = {
   employees : employees ,
   addresses : addresses ,
-  employeeHasAddressesList : employeeHasAddressesList
+  // employeeHasAddressesList : employeeHasAddressesList
 }
 
 export {
  demo
 }
-*/
+

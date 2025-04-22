@@ -1,0 +1,10 @@
+<div>
+  <data-table
+    [dataHeaders]="['AID', 'Country', 'City', 'Detail']"
+    [dataBody]="addresses"
+    [dataBodyKeys]="addressesKey"
+    [titleTable]="'Addresses List'"
+    (dataEdit)="setDataEdit($event)"
+    (dataRemove)="setDataRemove($event)">
+  </data-table>
+</div>

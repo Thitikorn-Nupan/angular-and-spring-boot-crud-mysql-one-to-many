@@ -1,0 +1,27 @@
+<!-- employee form -->
+<ng-container *ngIf="inputDynamicFieldsMain">
+  <data-form
+    [titleForm]="titleFormMain"
+    [inputDynamicFields]="inputDynamicFieldsMain"
+    [formGroup]="formGroupMain"
+    (getFormGroupMain)="setFormGroupMain($event)">
+  </data-form>
+</ng-container>
+<!-- address form 1 -->
+<ng-container *ngIf="enableFormSubMain1">
+  <data-form
+    [titleForm]="titleFormSubMain1"
+    [inputDynamicFields]="inputDynamicFieldsSubMain1"
+    [formGroup]="formGroupSubMain1"
+    (getFormGroupMain)="setFormGroupSubMain1($event)">
+  </data-form>
+</ng-container>
+<!-- address form 2 -->
+<ng-container *ngIf="enableFormSubMain2">
+  <data-form
+    [titleForm]="titleFormSubMain2"
+    [inputDynamicFields]="inputDynamicFieldsSubMain2"
+    [formGroup]="formGroupSubMain2"
+    (getFormGroupMain)="setFormGroupSubMain2($event)">
+  </data-form>
+</ng-container>
