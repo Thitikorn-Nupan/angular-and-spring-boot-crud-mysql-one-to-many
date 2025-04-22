@@ -58,7 +58,7 @@ public class DaoAddress implements ServiceAddress<Address> {
     public Map<String, Boolean> delete(Long aid) {
         Map<String, Boolean> response = new HashMap<>();
         response.put("data", false);
-        Logging.daoAddress.info("work");
+        // Logging.daoAddress.info("work");
         repositoryAddress.findById(aid)
                 .ifPresent((address) -> {
                     repositoryAddress.delete(address);
