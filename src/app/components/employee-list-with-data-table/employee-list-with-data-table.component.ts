@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Employee} from "../../entities/employee";
 import {HttpService} from "../service/http.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-employee-list-with-data-table',
@@ -12,8 +13,8 @@ export class EmployeeListWithDataTableComponent implements OnInit {
   protected declare employees: Array<Employee>;
   protected declare employeesKey: Array<string>;
 
-  constructor(private httpService: HttpService) {
-  }
+  constructor(private httpService: HttpService, private ngZone : NgZone , private  router : Router) {}
+
 
   ngOnInit(): void {
     this.httpService.readsEmployeesOnly().subscribe(
@@ -28,7 +29,8 @@ export class EmployeeListWithDataTableComponent implements OnInit {
   }
 
   protected setDataEdit($event: any) {
-    console.log($event)
+    const eid = $event._eid
+    this.ngZone.run(() => this.router.navigateByUrl('employee/editing/'+eid))
   }
 
   protected setDataRemove($event: any) {

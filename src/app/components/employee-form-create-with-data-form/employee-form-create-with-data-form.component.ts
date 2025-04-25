@@ -30,13 +30,16 @@ export class EmployeeFormCreateWithDataFormComponent implements OnInit{
   protected declare  formGroupSubMain2 : FormGroup
   protected declare inputDynamicFieldsSubMain2 : InputDynamicFiled[]
 
-  constructor(private httpService: HttpService, private ngZone : NgZone , private  router : Router) {
-  }
+  constructor(private httpService: HttpService, private ngZone : NgZone , private  router : Router) {}
 
   private initialFormGroupMain() {
     this.titleFormMain = 'Employee Form Create'
     this.formGroupMain = new FormGroup({})
     const positions = [
+      {name: '', value: 'Software Engineer'},
+      {name: '', value: 'Project Manager'},
+      {name: '', value: 'Senior Consultant'},
+      {name: '', value: 'Data Analyst'},
       {name: '', value: 'Full-Stack Developer'},
       {name: '', value: 'Backend Developer'},
       {name: '', value: 'Frontend Developer'},

@@ -17,6 +17,8 @@ import { AddressListWithDataTableComponent } from './components/address-list-wit
 import { DataFormComponent } from './components/data-form/data-form.component';
 import { EmployeeFormCreateWithDataFormComponent } from './components/employee-form-create-with-data-form/employee-form-create-with-data-form.component';
 import { AddressFormCreateWithDataFormComponent } from './components/address-form-create-with-data-form/address-form-create-with-data-form.component';
+import { AddressFormEditWithDataFormComponent } from './components/address-form-edit-with-data-form/address-form-edit-with-data-form.component';
+import { EmployeeFormEditWithDataFormComponent } from './components/employee-form-edit-with-data-form/employee-form-edit-with-data-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { AddressFormCreateWithDataFormComponent } from './components/address-for
     AddressListWithDataTableComponent,
     DataFormComponent,
     EmployeeFormCreateWithDataFormComponent,
-    AddressFormCreateWithDataFormComponent
+    AddressFormCreateWithDataFormComponent,
+    AddressFormEditWithDataFormComponent,
+    EmployeeFormEditWithDataFormComponent
   ],
     imports: [
         BrowserModule,

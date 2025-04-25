@@ -19,6 +19,12 @@ import {
 import {
   AddressFormCreateWithDataFormComponent
 } from "./components/address-form-create-with-data-form/address-form-create-with-data-form.component";
+import {
+  AddressFormEditWithDataFormComponent
+} from "./components/address-form-edit-with-data-form/address-form-edit-with-data-form.component";
+import {
+  EmployeeFormEditWithDataFormComponent
+} from "./components/employee-form-edit-with-data-form/employee-form-edit-with-data-form.component";
 
 const routes: Routes = [
   {path:'both/list' , component:BothListComponent},
@@ -28,8 +34,10 @@ const routes: Routes = [
   {path:'employee/form-create' , component:EmployeeFormCreateWithDataFormComponent}, // old way
   // {path:'address/form-create' , component:AddressFormCreateComponent}, // old way
   {path:'address/form-create' , component:AddressFormCreateWithDataFormComponent}, // new way
-  {path:'employee/editing/:eid' , component:EmployeeFormEditComponent},
-  {path:'address/editing/:aid' , component:AddressFormEditComponent},
+  // {path:'employee/editing/:eid' , component:EmployeeFormEditComponent},
+  {path:'employee/editing/:eid' , component:EmployeeFormEditWithDataFormComponent}, // new way
+  // {path:'address/editing/:aid' , component:AddressFormEditComponent}, // old way
+  {path:'address/editing/:aid' , component:AddressFormEditWithDataFormComponent}, // new way
   //  {path:'address/list' , component:AddressListComponent} ,// old way
   {path:'address/list' , component:AddressListWithDataTableComponent} // old way
 ];

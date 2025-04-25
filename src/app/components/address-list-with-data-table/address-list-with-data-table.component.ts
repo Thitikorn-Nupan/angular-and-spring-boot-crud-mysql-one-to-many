@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {HttpService} from "../service/http.service";
 import {Address} from "../../entities/address";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-address-list-with-data-table',
@@ -12,7 +13,8 @@ export class AddressListWithDataTableComponent implements OnInit {
   protected declare addresses: Array<Address>;
   protected declare addressesKey: Array<string>;
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private ngZone : NgZone , private  router : Router) {}
+
 
   ngOnInit(): void {
     this.httpService.readsAddresses().subscribe(
@@ -27,7 +29,9 @@ export class AddressListWithDataTableComponent implements OnInit {
   }
 
   protected setDataEdit($event : any) {
-    console.log($event)
+    // console.log($event)
+    const aid = $event._aid
+    this.ngZone.run(() => this.router.navigateByUrl('address/editing/'+aid))
   }
 
   protected setDataRemove($event : any) {

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
 
@@ -7,19 +7,21 @@ import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
   templateUrl: './data-form.component.html',
   styleUrls: ['./data-form.component.css']
 })
-export class DataFormComponent implements OnInit {
+export class DataFormComponent implements OnInit , AfterViewInit {
+
   @Input()
   public declare titleForm : string
   @Input()
   public declare formGroup : FormGroup
   @Input()
   public declare inputDynamicFields : InputDynamicFiled[]
-
+  @Input()
+  public declare defaultRadioValue : string
   @Output()
   public getFormGroupMain = new EventEmitter<FormGroup>()
 
-  constructor() {
-  }
+  constructor() {}
+
 
   /*private testDynamicForm() {
     this.inputDynamicFields = []
@@ -47,6 +49,17 @@ export class DataFormComponent implements OnInit {
     for (const inputDynamicField of this.inputDynamicFields) {
       this.formGroup.addControl(inputDynamicField.nameControl, inputDynamicField.dataControl)
     }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.defaultRadioValue!==undefined) {
+      this.setDefaultRadioButton(this.defaultRadioValue)
+    }
+  }
+
+  public setDefaultRadioButton(value : string): void {
+    // way to set default radio
+    this.formGroup.controls['position'].setValue(value)
   }
 
   protected onSubmitFormMainClick() {
