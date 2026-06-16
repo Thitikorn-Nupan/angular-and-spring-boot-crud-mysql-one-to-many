@@ -1,13 +1,11 @@
 package com.ttknpdev.understandhowtoworkwithangular.services.many;
 
 import com.ttknpdev.understandhowtoworkwithangular.entities.many.Address;
-import com.ttknpdev.understandhowtoworkwithangular.log.Logging;
 import com.ttknpdev.understandhowtoworkwithangular.repositories.RepositoryAddress;
 import com.ttknpdev.understandhowtoworkwithangular.repositories.RepositoryEmployee;
 import com.ttknpdev.understandhowtoworkwithangular.services.ServiceAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +35,6 @@ public class DaoAddress implements ServiceAddress<Address> {
             repositoryAddress.save(obj);
             response.put("data", true);
         });
-        // when failed to create
-        // set false it will be good to do something after that
         return response;
     }
 
@@ -58,7 +54,6 @@ public class DaoAddress implements ServiceAddress<Address> {
     public Map<String, Boolean> delete(Long aid) {
         Map<String, Boolean> response = new HashMap<>();
         response.put("data", false);
-        // Logging.daoAddress.info("work");
         repositoryAddress.findById(aid)
                 .ifPresent((address) -> {
                     repositoryAddress.delete(address);

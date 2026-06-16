@@ -3,14 +3,12 @@ package com.ttknpdev.understandhowtoworkwithangular.entities.one;
 import com.ttknpdev.understandhowtoworkwithangular.entities.many.Address;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-
 @Entity
 @Table(name = "employees")
 public class Employee {

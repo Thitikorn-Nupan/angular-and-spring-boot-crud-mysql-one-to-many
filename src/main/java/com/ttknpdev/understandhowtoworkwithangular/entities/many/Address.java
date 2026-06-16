@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-
 @Entity
 @Table(name = "addresses")
 public class Address {
@@ -32,7 +31,6 @@ public class Address {
     private String _country;
     @Column(name = "details")
     private String _details;
-
 
     @Override
     public String toString() {

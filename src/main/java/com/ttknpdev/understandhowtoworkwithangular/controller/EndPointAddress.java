@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 @CrossOrigin(origins="http://localhost:4200") // very importance it works like module cors in node
 @RestController
 @RequestMapping(value = "/api/address")
@@ -48,7 +47,6 @@ public class EndPointAddress {
         return ResponseEntity
                 .accepted()
                 .body(serviceAddress.create(address,eid));
-        // return null;
     }
 
     @PutMapping(value = "/update")
@@ -58,6 +56,4 @@ public class EndPointAddress {
                 .accepted()
                 .body(serviceAddress.update(address,address.get_aid()));
     }
-
-
 }
