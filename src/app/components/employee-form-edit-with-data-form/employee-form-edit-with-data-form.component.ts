@@ -1,11 +1,9 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
-import {HttpService} from "../service/http.service";
+import {HttpService} from "../../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Address} from "../../entities/address";
 import {Employee} from "../../entities/employee";
-import {DataFormComponent} from "../data-form/data-form.component";
 
 @Component({
   selector: 'app-employee-form-edit-with-data-form',
@@ -13,7 +11,6 @@ import {DataFormComponent} from "../data-form/data-form.component";
   styleUrls: ['./employee-form-edit-with-data-form.component.css']
 })
 export class EmployeeFormEditWithDataFormComponent implements OnInit, AfterViewChecked {
-
   // @ViewChild(DataFormComponent,{static: false})
   // public DataFormComponent! : DataFormComponent;
   protected declare titleFormMain: string
@@ -27,13 +24,12 @@ export class EmployeeFormEditWithDataFormComponent implements OnInit, AfterViewC
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges() // fix  Expression has changed after it was checked. Previous value for 'ng-valid': 'true'. Current value: 'false'.
-
   }
 
   ngOnInit(): void {
     this.eid = Number(this.activatedRoute.snapshot.paramMap.get("eid"))
     this.httpService.readEmployee(this.eid).subscribe((response: Employee) => {
-        console.log('response ', response)
+        // console.log('response ', response)
         this.initialFormGroupMain(response)
       }
     )
@@ -68,11 +64,12 @@ export class EmployeeFormEditWithDataFormComponent implements OnInit, AfterViewC
     const employee = new Employee(this.formGroupMain.value.fullname, this.formGroupMain.value.age, this.formGroupMain.value.position, this.formGroupMain.value.salary, null);
     if (this.formGroupMain.value.confirm) {
       this.httpService.updateEmployee(this.eid, employee).subscribe((response: any) => {
-        console.log('response ', response)
+        // console.log('response ', response)
         this.ngZone.run(() => {
           this.router.navigateByUrl('employee/list')
         })
       })
     }
   }
+
 }

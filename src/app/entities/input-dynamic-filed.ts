@@ -1,19 +1,18 @@
 import {FormControl} from "@angular/forms";
 
 export class InputDynamicFiled {
-  public typeInput : string
-  public skipMode : boolean
-  public nameInput : string
-  public idInput : string
-  public placeholderInput : string
-  public nameControl : string
-  public dataControl : FormControl
-  public radioButtonMode : boolean
-  public nameRadiobutton : string
-  public dataRadioButton : {name : string , value : string} []
-  public checkboxMode : boolean
-  public dataCheckbox : {label : string , value : boolean}[]
-
+  public typeInput: string
+  public skipMode: boolean
+  public nameInput: string
+  public idInput: string
+  public placeholderInput: string
+  public nameControl: string
+  public dataControl: FormControl
+  public radioButtonMode: boolean
+  public nameRadiobutton: string
+  public dataRadioButton: { name: string, value: string } []
+  public checkboxMode: boolean
+  public dataCheckbox: { label: string, value: boolean }[]
 
   constructor(typeInput: string, nameInput: string, idInput: string, placeholderInput: string, nameControl: string, dataControl: FormControl) {
     this.typeInput = typeInput;
@@ -35,12 +34,12 @@ export class InputDynamicFiled {
     return this
   }
 
-  public setNameRadioButton(value:string) {
+  public setNameRadioButton(value: string) {
     this.nameRadiobutton = value
     return this
   }
 
-  public setDataRadioButton(value : {name : string , value : string} []){
+  public setDataRadioButton(value: { name: string, value: string } []) {
     this.dataRadioButton = value
     return this
   }
@@ -50,15 +49,13 @@ export class InputDynamicFiled {
     return this
   }
 
-  public setDataCheckbox(value : {label : string , value : boolean} []){
+  public setDataCheckbox(value: { label: string, value: boolean } []) {
     this.dataCheckbox = value
     return this
   }
 
-
-  public setSkipMode(value : boolean) {
+  public setSkipMode(value: boolean) {
     this.skipMode = value;
     return this
   }
-
 }

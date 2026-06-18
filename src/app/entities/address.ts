@@ -1,10 +1,9 @@
 // Many
 class Address {
-
-  _aid!:number
-  _country!:string
-  _city!:string
-  _details!:string
+  _aid!: number
+  _country!: string
+  _city!: string
+  _details!: string
 
   constructor(country: string, city: string, details: string) {
     this._country = country;
@@ -23,6 +22,7 @@ class Address {
   get country(): string {
     return this._country;
   }
+
   set country(value: string) {
     this._country = value;
   }
@@ -42,7 +42,6 @@ class Address {
   set details(value: string) {
     this._details = value;
   }
-
 }
 
 export {

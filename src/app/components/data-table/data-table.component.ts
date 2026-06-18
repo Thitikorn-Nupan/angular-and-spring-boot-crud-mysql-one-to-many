@@ -22,7 +22,6 @@ export class DataTableComponent implements OnInit{
   public dataRemove = new EventEmitter<any>()
 
   ngOnInit(): void {
-
   }
 
   protected onEditClick(data : any): void {
@@ -34,5 +33,4 @@ export class DataTableComponent implements OnInit{
     this.dataRemove.emit(data)
     // console.log('remove : ',data)
   }
-
 }

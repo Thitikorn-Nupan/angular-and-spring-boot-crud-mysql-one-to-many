@@ -4,9 +4,8 @@
     <!-- form main -->
     <div class="form-holder">
       <div class="form-content">
-
+        <!---->
         <form [formGroup]="formGroup" (ngSubmit)="onSubmitFormMainClick()" class="requires-validation form-control p-5">
-
           <ng-container *ngFor="let input of inputDynamicFields">
 
             <ng-container *ngIf="input.typeInput==='text' && !input.skipMode">
@@ -39,7 +38,6 @@
 
             <ng-container *ngIf="input.typeInput==='checkbox' && input.checkboxMode && !input.skipMode">
               <ng-container *ngFor="let checkbox of input.dataCheckbox">
-
                 <div class="form-check p-lg-3">
                   <!-- why i can't bind dynamic type on radio button ?? -->
                   <input class="form-check-input" type="checkbox" [name]="input.nameInput" [id]="input.idInput" [value]="checkbox.value" [formControlName]="input.nameControl" required/>
@@ -47,7 +45,6 @@
                 </div>
               </ng-container>
             </ng-container>
-
 
             <ng-container *ngIf="input.typeInput==='textarea' && !input.skipMode">
               <!-- type number -->
@@ -62,7 +59,6 @@
             <button id="reset" type="reset" class="btn btn-dark  p-2">Reset</button>
           </div>
         </form>
-
       </div>
     </div>
   </ng-container>
