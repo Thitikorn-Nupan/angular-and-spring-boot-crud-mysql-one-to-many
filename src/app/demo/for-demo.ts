@@ -5,7 +5,6 @@ let e1 : Employee = new Employee("peter",30,"java back-end",30000.00,null)
 let e2 : Employee = new Employee("mark",31,"java back-end",35000.00,null)
 let e3 : Employee = new Employee("adam",28,"node.js back-end",25000.00,null)
 
-
 let a1 : Address = new Address("TH","Bangkok","225/9 Soi Thonglor 10, Sukhumvit Road")
 let a2 : Address = new Address("TH","Bangkok","125/9 Soi Thonglor 15, Sukhumvit Road")
 let a3 : Address = new Address("TH","Bangkok","979/451 Future Ristic Condo, Siriphong Road.")
@@ -36,7 +35,6 @@ addresses.push(a1)
 addresses.push(a2)
 addresses.push(a3)
 addresses.push(a4)
-
 
 const demo = {
   employees : employees ,

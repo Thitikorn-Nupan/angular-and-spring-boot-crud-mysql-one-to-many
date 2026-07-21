@@ -9,7 +9,7 @@ class Employee {
   _salary! : number
   _addresses! : Address[] | null
 
-  constructor(fullname: string | '', age: number | 0  , position: string | '', salary: number | 0, addresses: Address[] | null ) {
+  constructor(fullname: string | '', age: number | 0, position: string | '', salary: number | 0, addresses: Address[] | null) {
     this._fullname = fullname;
     this._age = age;
     this._position = position;
@@ -66,7 +66,6 @@ class Employee {
   }
 
 }
-
 
 export {
   Employee

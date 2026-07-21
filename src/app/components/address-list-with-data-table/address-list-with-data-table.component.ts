@@ -1,5 +1,5 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {HttpService} from "../service/http.service";
+import {HttpService} from "../../service/http.service";
 import {Address} from "../../entities/address";
 import {Router} from "@angular/router";
 
@@ -46,4 +46,5 @@ export class AddressListWithDataTableComponent implements OnInit {
       })
     }
   }
+
 }

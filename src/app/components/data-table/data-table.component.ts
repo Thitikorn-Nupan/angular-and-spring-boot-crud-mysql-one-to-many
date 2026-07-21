@@ -33,5 +33,4 @@ export class DataTableComponent implements OnInit{
     this.dataRemove.emit(data)
     // console.log('remove : ',data)
   }
-
 }

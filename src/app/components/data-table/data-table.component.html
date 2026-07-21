@@ -1,9 +1,9 @@
 <div class="container" style="margin: 0 auto;">
-
+  <!---->
   <h2 class="text-center p-4 mt-4">{{titleTable}}</h2>
-
+  <!---->
   <table class="table">
-
+    <!---->
     <thead class="table-dark">
     <tr>
       <ng-container *ngFor="let dataHeader of dataHeaders">
@@ -12,7 +12,7 @@
       <th class="text-center" scope="col">Action</th>
     </tr>
     </thead>
-
+    <!---->
     <tbody>
       <ng-container *ngFor="let data of dataBody let i = index;"> <!-- data as object -->
         <tr>
@@ -28,7 +28,7 @@
         </tr>
       </ng-container>
     </tbody>
-
+    <!---->
     <tfoot>
     <ng-container *ngIf="dataHeaders && dataBody">
       <tr>
@@ -40,5 +40,4 @@
     </ng-container>
     </tfoot>
   </table>
-
 </div>

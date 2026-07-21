@@ -1,7 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {HttpService} from "../service/http.service";
+import {HttpService} from "../../service/http.service";
 import {Router} from "@angular/router";
 import {Employee} from 'src/app/entities/employee';
 import {Address} from "../../entities/address";

@@ -7,6 +7,5 @@ import {demo} from "./demo/for-demo";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  // title = 'lab-ag-and-spring-boot-crud-mysql';
   protected readonly demo = demo;
 }

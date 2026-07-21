@@ -1,7 +1,7 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, NgZone, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
-import {HttpService} from "../service/http.service";
+import {HttpService} from "../../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Employee} from "../../entities/employee";
 
@@ -11,7 +11,6 @@ import {Employee} from "../../entities/employee";
   styleUrls: ['./employee-form-edit-with-data-form.component.css']
 })
 export class EmployeeFormEditWithDataFormComponent implements OnInit, AfterViewChecked {
-
   // @ViewChild(DataFormComponent,{static: false})
   // public DataFormComponent! : DataFormComponent;
   protected declare titleFormMain: string
@@ -69,4 +68,5 @@ export class EmployeeFormEditWithDataFormComponent implements OnInit, AfterViewC
       })
     }
   }
+
 }

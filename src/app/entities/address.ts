@@ -22,6 +22,7 @@ class Address {
   get country(): string {
     return this._country;
   }
+
   set country(value: string) {
     this._country = value;
   }
@@ -41,7 +42,6 @@ class Address {
   set details(value: string) {
     this._details = value;
   }
-
 }
 
 export {

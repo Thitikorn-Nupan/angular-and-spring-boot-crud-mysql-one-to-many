@@ -1,6 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {Employee} from "../../entities/employee";
-import {HttpService} from "../service/http.service";
+import {HttpService} from "../../service/http.service";
 import {Router} from "@angular/router";
 
 @Component({

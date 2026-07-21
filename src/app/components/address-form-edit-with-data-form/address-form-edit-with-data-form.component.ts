@@ -1,7 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
-import {HttpService} from "../service/http.service";
+import {HttpService} from "../../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Address} from "../../entities/address";
 import {AfterViewChecked, ChangeDetectorRef} from '@angular/core'
@@ -23,16 +23,11 @@ export class AddressFormEditWithDataFormComponent implements OnInit, AfterViewCh
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges() // fix  Expression has changed after it was checked. Previous value for 'ng-valid': 'true'. Current value: 'false'.
-
   }
 
   ngOnInit(): void {
     const aid = Number(this.activatedRoute.snapshot.paramMap.get("aid"))
-    this.httpService.readAddress(aid).subscribe((response: Address) => {
-        console.log('response ', response)
-        this.initialFormGroupMain(response)
-      }
-    )
+    this.httpService.readAddress(aid).subscribe((response: Address) => this.initialFormGroupMain(response))
   }
 
   private initialFormGroupMain(address: Address) {
@@ -54,11 +49,11 @@ export class AddressFormEditWithDataFormComponent implements OnInit, AfterViewCh
     address.aid = Number(this.activatedRoute.snapshot.paramMap.get("aid"))
     if (this.formGroupMain.value.confirm) {
       this.httpService.updateAddress(address).subscribe((response: any) => {
-        console.log('response ', response)
         if (response.data == true) {
           this.ngZone.run(() => this.router.navigateByUrl('address/list'))
         }
       })
     }
   }
+
 }

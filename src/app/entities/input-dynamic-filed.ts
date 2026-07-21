@@ -34,12 +34,12 @@ export class InputDynamicFiled {
     return this
   }
 
-  public setNameRadioButton(value:string) {
+  public setNameRadioButton(value: string) {
     this.nameRadiobutton = value
     return this
   }
 
-  public setDataRadioButton(value : {name : string , value : string} []){
+  public setDataRadioButton(value: { name: string, value: string } []) {
     this.dataRadioButton = value
     return this
   }
@@ -49,7 +49,7 @@ export class InputDynamicFiled {
     return this
   }
 
-  public setDataCheckbox(value : {label : string , value : boolean} []){
+  public setDataCheckbox(value: { label: string, value: boolean } []) {
     this.dataCheckbox = value
     return this
   }
@@ -58,5 +58,4 @@ export class InputDynamicFiled {
     this.skipMode = value;
     return this
   }
-
 }
