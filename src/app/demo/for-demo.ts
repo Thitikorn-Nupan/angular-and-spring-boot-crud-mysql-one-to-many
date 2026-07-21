@@ -1,4 +1,3 @@
-
 import {Employee} from "../entities/employee";
 import {Address} from "../entities/address";
 
@@ -11,8 +10,6 @@ let a1 : Address = new Address("TH","Bangkok","225/9 Soi Thonglor 10, Sukhumvit 
 let a2 : Address = new Address("TH","Bangkok","125/9 Soi Thonglor 15, Sukhumvit Road")
 let a3 : Address = new Address("TH","Bangkok","979/451 Future Ristic Condo, Siriphong Road.")
 let a4 : Address = new Address("TH","Bang Bon","125/451 Futuristic Condo, Sirichai Alley, Siripong road")
-
-
 
 
 
@@ -44,9 +41,7 @@ addresses.push(a4)
 const demo = {
   employees : employees ,
   addresses : addresses ,
-  // employeeHasAddressesList : employeeHasAddressesList
 }
-
 export {
  demo
 }

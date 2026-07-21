@@ -1,6 +1,5 @@
 // Many
 class Address {
-
   _aid!:number
   _country!:string
   _city!:string

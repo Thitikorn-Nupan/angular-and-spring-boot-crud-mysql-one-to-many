@@ -10,20 +10,20 @@ import {Address} from "../../entities/address";
   templateUrl: './address-form-create-with-data-form.component.html',
   styleUrls: ['./address-form-create-with-data-form.component.css']
 })
-export class AddressFormCreateWithDataFormComponent implements OnInit{
+export class AddressFormCreateWithDataFormComponent implements OnInit {
 
-  protected declare  titleFormMain : string
-  protected declare  formGroupMain : FormGroup
-  protected declare inputDynamicFieldsMain : InputDynamicFiled[]
+  protected declare titleFormMain: string
+  protected declare formGroupMain: FormGroup
+  protected declare inputDynamicFieldsMain: InputDynamicFiled[]
 
-  constructor(private httpService : HttpService ,private  ngZone : NgZone ,private  router : Router) {
+  constructor(private readonly httpService: HttpService, private readonly ngZone: NgZone, private readonly router: Router) {
   }
 
   ngOnInit(): void {
     this.initialFormGroupMain()
   }
 
-  private initialFormGroupMain() {
+  private initialFormGroupMain(): void {
     const confirm = [
       {label: 'Confirm', value: true}, // if true will add new form
     ]
@@ -37,17 +37,16 @@ export class AddressFormCreateWithDataFormComponent implements OnInit{
     this.inputDynamicFieldsMain.push(new InputDynamicFiled('checkbox', 'confirm', 'ad-confirm-id', '', 'confirm', new FormControl(false, Validators.required)).setCheckboxMode(true).setDataCheckbox(confirm))
   }
 
-  protected setFormGroupMain($event : FormGroup): void {
+  protected setFormGroupMain($event: FormGroup): void {
     this.formGroupMain = $event
-    const address = new Address(this.formGroupMain.value.country,this.formGroupMain.value.city,this.formGroupMain.value.details);
+    const address = new Address(this.formGroupMain.value.country, this.formGroupMain.value.city, this.formGroupMain.value.details);
     if (this.formGroupMain.value.confirm) {
-      this.httpService.createAddress(address,this.formGroupMain.value.eid).subscribe(
-        (response : any) => {
-          console.log('response ', response)
-          if (response.data == true) {
-            this.ngZone.run(() => {this.router.navigateByUrl('address/list')})
-          }
-        })
+      this.httpService.createAddress(address, this.formGroupMain.value.eid).subscribe((response: any) => {
+        console.log('response ', response)
+        if (response.data == true) {
+          this.ngZone.run(() => this.router.navigateByUrl('address/list'))
+        }
+      })
     }
   }
 

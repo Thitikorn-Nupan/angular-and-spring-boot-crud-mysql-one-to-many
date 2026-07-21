@@ -14,7 +14,6 @@ export class InputDynamicFiled {
   public checkboxMode : boolean
   public dataCheckbox : {label : string , value : boolean}[]
 
-
   constructor(typeInput: string, nameInput: string, idInput: string, placeholderInput: string, nameControl: string, dataControl: FormControl) {
     this.typeInput = typeInput;
     this.nameInput = nameInput;
@@ -54,7 +53,6 @@ export class InputDynamicFiled {
     this.dataCheckbox = value
     return this
   }
-
 
   public setSkipMode(value : boolean) {
     this.skipMode = value;

@@ -4,7 +4,7 @@ import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
 import {HttpService} from "../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Address} from "../../entities/address";
-import { AfterViewChecked, ChangeDetectorRef } from '@angular/core'
+import {AfterViewChecked, ChangeDetectorRef} from '@angular/core'
 
 
 @Component({
@@ -12,13 +12,13 @@ import { AfterViewChecked, ChangeDetectorRef } from '@angular/core'
   templateUrl: './address-form-edit-with-data-form.component.html',
   styleUrls: ['./address-form-edit-with-data-form.component.css']
 })
-export class AddressFormEditWithDataFormComponent implements OnInit,AfterViewChecked  {
+export class AddressFormEditWithDataFormComponent implements OnInit, AfterViewChecked {
 
   protected declare titleFormMain: string
   protected declare formGroupMain: FormGroup
   protected declare inputDynamicFieldsMain: InputDynamicFiled[]
 
-  constructor(private httpService: HttpService, private ngZone: NgZone, private router: Router, private activatedRoute: ActivatedRoute,private readonly changeDetectorRef: ChangeDetectorRef) {
+  constructor(private httpService: HttpService, private ngZone: NgZone, private router: Router, private activatedRoute: ActivatedRoute, private readonly changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngAfterViewChecked(): void {
@@ -50,15 +50,13 @@ export class AddressFormEditWithDataFormComponent implements OnInit,AfterViewChe
 
   protected setFormGroupMain($event: FormGroup): void {
     this.formGroupMain = $event
-      let address = new Address(this.formGroupMain.value.country, this.formGroupMain.value.city, this.formGroupMain.value.details);
-     address.aid = Number(this.activatedRoute.snapshot.paramMap.get("aid"))
+    const address = new Address(this.formGroupMain.value.country, this.formGroupMain.value.city, this.formGroupMain.value.details);
+    address.aid = Number(this.activatedRoute.snapshot.paramMap.get("aid"))
     if (this.formGroupMain.value.confirm) {
       this.httpService.updateAddress(address).subscribe((response: any) => {
         console.log('response ', response)
         if (response.data == true) {
-          this.ngZone.run(() => {
-            this.router.navigateByUrl('address/list')
-          })
+          this.ngZone.run(() => this.router.navigateByUrl('address/list'))
         }
       })
     }

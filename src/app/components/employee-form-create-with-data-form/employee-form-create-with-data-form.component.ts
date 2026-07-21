@@ -3,7 +3,7 @@ import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {HttpService} from "../service/http.service";
 import {Router} from "@angular/router";
-import { Employee } from 'src/app/entities/employee';
+import {Employee} from 'src/app/entities/employee';
 import {Address} from "../../entities/address";
 
 @Component({
@@ -11,28 +11,29 @@ import {Address} from "../../entities/address";
   templateUrl: './employee-form-create-with-data-form.component.html',
   styleUrls: ['./employee-form-create-with-data-form.component.css']
 })
-export class EmployeeFormCreateWithDataFormComponent implements OnInit{
+export class EmployeeFormCreateWithDataFormComponent implements OnInit {
 
-  private declare employee : Employee
+  private declare employee: Employee
 
-  protected declare  titleFormMain : string
-  protected declare  formGroupMain : FormGroup
-  protected  declare inputDynamicFieldsMain : InputDynamicFiled[]
+  protected declare titleFormMain: string
+  protected declare formGroupMain: FormGroup
+  protected declare inputDynamicFieldsMain: InputDynamicFiled[]
 
-  protected enableFormSubMain1 : boolean = false;
-  protected enableFormSubMain2 : boolean = false;
+  protected enableFormSubMain1: boolean = false;
+  protected enableFormSubMain2: boolean = false;
 
-  protected declare  titleFormSubMain1 : string
-  protected declare  formGroupSubMain1 : FormGroup
-  protected declare inputDynamicFieldsSubMain1 : InputDynamicFiled[]
+  protected declare titleFormSubMain1: string
+  protected declare formGroupSubMain1: FormGroup
+  protected declare inputDynamicFieldsSubMain1: InputDynamicFiled[]
 
-  protected declare  titleFormSubMain2 : string
-  protected declare  formGroupSubMain2 : FormGroup
-  protected declare inputDynamicFieldsSubMain2 : InputDynamicFiled[]
+  protected declare titleFormSubMain2: string
+  protected declare formGroupSubMain2: FormGroup
+  protected declare inputDynamicFieldsSubMain2: InputDynamicFiled[]
 
-  constructor(private httpService: HttpService, private ngZone : NgZone , private  router : Router) {}
+  constructor(private readonly httpService: HttpService, private readonly ngZone: NgZone, private readonly router: Router) {
+  }
 
-  private initialFormGroupMain() {
+  private initialFormGroupMain(): void {
     this.titleFormMain = 'Employee Form Create'
     this.formGroupMain = new FormGroup({})
     const positions = [
@@ -55,7 +56,7 @@ export class EmployeeFormCreateWithDataFormComponent implements OnInit{
     this.inputDynamicFieldsMain.push(new InputDynamicFiled('checkbox', 'confirm', 'em-confirm-id', '', 'confirm', new FormControl(false, Validators.required)).setCheckboxMode(true).setDataCheckbox(confirm))
   }
 
-  private initialFormGroupSubMain1() {
+  private initialFormGroupSubMain1(): void {
     const confirm = [
       {label: 'Want to add more the address', value: true}, // if true will add new form
     ]
@@ -69,8 +70,7 @@ export class EmployeeFormCreateWithDataFormComponent implements OnInit{
     this.inputDynamicFieldsSubMain1.push(new InputDynamicFiled('checkbox', 'confirm', 'ad-confirm-id', '', 'confirm', new FormControl(false, Validators.required)).setCheckboxMode(true).setDataCheckbox(confirm))
   }
 
-  private initialFormGroupSubMain2() {
-
+  private initialFormGroupSubMain2(): void {
     this.titleFormSubMain2 = 'Address Form Create 2'
     this.formGroupSubMain2 = new FormGroup({})
     this.inputDynamicFieldsSubMain2 = []
@@ -84,9 +84,9 @@ export class EmployeeFormCreateWithDataFormComponent implements OnInit{
     this.initialFormGroupMain()
   }
 
-  protected setFormGroupMain($event : FormGroup): void {
+  protected setFormGroupMain($event: FormGroup): void {
     this.formGroupMain = $event
-    this.employee = new Employee(this.formGroupMain.value.fullname,this.formGroupMain.value.age,this.formGroupMain.value.position,this.formGroupMain.value.salary,null);
+    this.employee = new Employee(this.formGroupMain.value.fullname, this.formGroupMain.value.age, this.formGroupMain.value.position, this.formGroupMain.value.salary, null);
     if (this.formGroupMain.value.confirm) {
       this.enableFormSubMain1 = true
       this.initialFormGroupSubMain1()
@@ -96,18 +96,17 @@ export class EmployeeFormCreateWithDataFormComponent implements OnInit{
     }
   }
 
-  private createEmployee() {
-    this.httpService.createEmployee(this.employee).subscribe(
-      (response: any) => {
-        console.log('response ', response)
-        this.ngZone.run(() => this.router.navigateByUrl('employee/list'))
-      })
+  private createEmployee(): void {
+    this.httpService.createEmployee(this.employee).subscribe((response: any) => {
+      console.log('response ', response)
+      this.ngZone.run(() => this.router.navigateByUrl('employee/list'))
+    })
   }
 
-  protected setFormGroupSubMain1($event : FormGroup): void {
+  protected setFormGroupSubMain1($event: FormGroup): void {
     this.formGroupSubMain1 = $event
-    let addresses : Array<Address> = new Array<Address>()
-    let address : Address = new Address(this.formGroupSubMain1.value.country , this.formGroupSubMain1.value.city ,this.formGroupSubMain1.value.details);
+    const addresses: Array<Address> = new Array<Address>()
+    const address: Address = new Address(this.formGroupSubMain1.value.country, this.formGroupSubMain1.value.city, this.formGroupSubMain1.value.details);
     addresses.push(address) // [0] = address
     this.employee.addresses = addresses // before it was null addresses now it was not
     if (this.formGroupSubMain1.valid) {
@@ -118,9 +117,9 @@ export class EmployeeFormCreateWithDataFormComponent implements OnInit{
     }
   }
 
-  protected setFormGroupSubMain2($event : FormGroup): void {
+  protected setFormGroupSubMain2($event: FormGroup): void {
     this.formGroupSubMain2 = $event
-    let address : Address = new Address(this.formGroupSubMain2.value.country , this.formGroupSubMain2.value.city ,this.formGroupSubMain2.value.details);
+    const address: Address = new Address(this.formGroupSubMain2.value.country, this.formGroupSubMain2.value.city, this.formGroupSubMain2.value.details);
     this.employee.addresses?.push(address) // before it was addresses once element now it was twice
     if (this.formGroupSubMain2.valid) {
       this.createEmployee()

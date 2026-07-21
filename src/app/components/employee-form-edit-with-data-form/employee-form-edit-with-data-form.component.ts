@@ -3,9 +3,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {InputDynamicFiled} from "../../entities/input-dynamic-filed";
 import {HttpService} from "../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Address} from "../../entities/address";
 import {Employee} from "../../entities/employee";
-import {DataFormComponent} from "../data-form/data-form.component";
 
 @Component({
   selector: 'app-employee-form-edit-with-data-form',
@@ -22,24 +20,22 @@ export class EmployeeFormEditWithDataFormComponent implements OnInit, AfterViewC
   protected declare currentRadioValue: string
   private declare eid: number
 
-  constructor(private httpService: HttpService, private ngZone: NgZone, private router: Router, private activatedRoute: ActivatedRoute, private readonly changeDetectorRef: ChangeDetectorRef) {
+  constructor(private readonly httpService: HttpService, private readonly ngZone: NgZone, private readonly router: Router, private readonly activatedRoute: ActivatedRoute, private readonly changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngAfterViewChecked(): void {
     this.changeDetectorRef.detectChanges() // fix  Expression has changed after it was checked. Previous value for 'ng-valid': 'true'. Current value: 'false'.
-
   }
 
   ngOnInit(): void {
     this.eid = Number(this.activatedRoute.snapshot.paramMap.get("eid"))
     this.httpService.readEmployee(this.eid).subscribe((response: Employee) => {
-        console.log('response ', response)
         this.initialFormGroupMain(response)
       }
     )
   }
 
-  private initialFormGroupMain(employee: Employee) {
+  private initialFormGroupMain(employee: Employee) : void {
     this.titleFormMain = 'Employee Form Update'
     this.formGroupMain = new FormGroup({})
     const positions = [
@@ -69,9 +65,7 @@ export class EmployeeFormEditWithDataFormComponent implements OnInit, AfterViewC
     if (this.formGroupMain.value.confirm) {
       this.httpService.updateEmployee(this.eid, employee).subscribe((response: any) => {
         console.log('response ', response)
-        this.ngZone.run(() => {
-          this.router.navigateByUrl('employee/list')
-        })
+        this.ngZone.run(() => this.router.navigateByUrl('employee/list'))
       })
     }
   }

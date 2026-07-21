@@ -2,7 +2,6 @@ import {Address} from "./address";
 
 // One
 class Employee {
-
   _eid! : number
   _fullname! : string
   _age! : number
