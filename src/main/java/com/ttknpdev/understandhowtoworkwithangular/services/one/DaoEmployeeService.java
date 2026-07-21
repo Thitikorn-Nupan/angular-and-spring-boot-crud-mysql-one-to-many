@@ -3,9 +3,9 @@ package com.ttknpdev.understandhowtoworkwithangular.services.one;
 import com.ttknpdev.understandhowtoworkwithangular.entities.many.Address;
 import com.ttknpdev.understandhowtoworkwithangular.entities.one.Employee;
 import com.ttknpdev.understandhowtoworkwithangular.log.Logging;
-import com.ttknpdev.understandhowtoworkwithangular.repositories.RepositoryAddress;
-import com.ttknpdev.understandhowtoworkwithangular.repositories.RepositoryEmployee;
-import com.ttknpdev.understandhowtoworkwithangular.services.ServiceEmployee;
+import com.ttknpdev.understandhowtoworkwithangular.repositories.AddressRepository;
+import com.ttknpdev.understandhowtoworkwithangular.repositories.EmployeeRepository;
+import com.ttknpdev.understandhowtoworkwithangular.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -14,25 +14,25 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class DaoEmployee implements ServiceEmployee<Employee> {
+public class DaoEmployeeService implements EmployeeService<Employee> {
 
-    private final RepositoryEmployee repositoryEmployee;
-    private final RepositoryAddress repositoryAddress;
+    private final EmployeeRepository employeeRepository;
+    private final AddressRepository addressRepository;
 
     @Autowired
-    public DaoEmployee(RepositoryEmployee repositoryEmployee ,  RepositoryAddress repositoryAddress ) {
-        this.repositoryEmployee = repositoryEmployee;
-        this.repositoryAddress = repositoryAddress;
+    public DaoEmployeeService(EmployeeRepository employeeRepository, AddressRepository addressRepository) {
+        this.employeeRepository = employeeRepository;
+        this.addressRepository = addressRepository;
     }
 
     @Override
     public Iterable<Employee> reads() {
-        return repositoryEmployee.findAll();
+        return employeeRepository.findAll();
     }
 
     @Override
     public List<Employee> readsOnlyEmployee() {
-        Iterable<Employee> employees = repositoryEmployee.findAll();
+        Iterable<Employee> employees = employeeRepository.findAll();
         List<Employee> modify = new ArrayList<>();
         for (Employee employee :  employees) {
             employee.set_addresses(null);
@@ -44,7 +44,7 @@ public class DaoEmployee implements ServiceEmployee<Employee> {
     @Override
     public Employee read(Long eid) {
         Employee employee = new Employee();
-        repositoryEmployee.findById(eid).ifPresent(employeePresent -> {
+        employeeRepository.findById(eid).ifPresent(employeePresent -> {
             employee.set_eid(employeePresent.get_eid());
             employee.set_fullname(employeePresent.get_fullname());
             employee.set_age(employeePresent.get_age());
@@ -56,16 +56,16 @@ public class DaoEmployee implements ServiceEmployee<Employee> {
 
     @Override
     public Employee create(Employee obj) {
-        return repositoryEmployee.save(obj);
+        return employeeRepository.save(obj);
     }
 
     @Override
     public Map<String, Boolean> delete(Long eid) {
         Map<String,Boolean> response = new HashMap<>();
-        repositoryEmployee.findById(eid).ifPresent(employee -> {
-            List< Address> addresses  = (List<Address>) repositoryAddress.readsAddressesByFK(eid);
+        employeeRepository.findById(eid).ifPresent(employee -> {
+            List< Address> addresses  = (List<Address>) addressRepository.readsAddressesByFK(eid);
                 if (addresses.isEmpty()) {
-                    repositoryEmployee.delete(employee);
+                    employeeRepository.delete(employee);
                     response.put("data",true);
                     Logging.daoEmployee.info("deleted employee");
                 }
@@ -81,13 +81,13 @@ public class DaoEmployee implements ServiceEmployee<Employee> {
     public Map<String, Boolean> update(Employee obj, Long eid) {
         Map<String,Boolean> response = new HashMap<>();
         response.put("data",false);
-        repositoryEmployee.findById(eid).ifPresent(employee -> {
+        employeeRepository.findById(eid).ifPresent(employee -> {
             employee.set_fullname(obj.get_fullname());
             employee.set_age(obj.get_age());
             employee.set_salary(obj.get_salary());
             employee.set_position(obj.get_position());
             Logging.daoEmployee.info("can update");
-            repositoryEmployee.save(employee);
+            employeeRepository.save(employee);
             response.put("data",true);
         });
         return response;

@@ -1,38 +1,38 @@
 package com.ttknpdev.understandhowtoworkwithangular.services.many;
 
 import com.ttknpdev.understandhowtoworkwithangular.entities.many.Address;
-import com.ttknpdev.understandhowtoworkwithangular.repositories.RepositoryAddress;
-import com.ttknpdev.understandhowtoworkwithangular.repositories.RepositoryEmployee;
-import com.ttknpdev.understandhowtoworkwithangular.services.ServiceAddress;
+import com.ttknpdev.understandhowtoworkwithangular.repositories.AddressRepository;
+import com.ttknpdev.understandhowtoworkwithangular.repositories.EmployeeRepository;
+import com.ttknpdev.understandhowtoworkwithangular.services.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class DaoAddress implements ServiceAddress<Address> {
+public class DaoAddressService implements AddressService<Address> {
 
-    private final RepositoryAddress repositoryAddress;
-    private final RepositoryEmployee repositoryEmployee;
+    private final AddressRepository addressRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
-    public DaoAddress(RepositoryAddress repositoryAddress, RepositoryEmployee repositoryEmployee) {
-        this.repositoryAddress = repositoryAddress;
-        this.repositoryEmployee = repositoryEmployee;
+    public DaoAddressService(AddressRepository addressRepository, EmployeeRepository employeeRepository) {
+        this.addressRepository = addressRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
     public Iterable<Address> reads() {
-        return repositoryAddress.findAll();
+        return addressRepository.findAll();
     }
 
     @Override
     public Map<String, Boolean> create(Address obj, Long eid) {
         Map<String, Boolean> response = new HashMap<>();
         response.put("data", false);
-        repositoryEmployee.findById(eid).ifPresent(employee -> {
+        employeeRepository.findById(eid).ifPresent(employee -> {
             obj.setEmployee(employee);
-            repositoryAddress.save(obj);
+            addressRepository.save(obj);
             response.put("data", true);
         });
         return response;
@@ -41,7 +41,7 @@ public class DaoAddress implements ServiceAddress<Address> {
     @Override
     public Address read(Long aid) {
         Address address = new Address();
-        repositoryAddress.findById(aid).ifPresent(addressPresent -> {
+        addressRepository.findById(aid).ifPresent(addressPresent -> {
             address.set_aid(addressPresent.get_aid());
             address.set_country(addressPresent.get_country());
             address.set_city(addressPresent.get_city());
@@ -54,9 +54,10 @@ public class DaoAddress implements ServiceAddress<Address> {
     public Map<String, Boolean> delete(Long aid) {
         Map<String, Boolean> response = new HashMap<>();
         response.put("data", false);
-        repositoryAddress.findById(aid)
+        addressRepository
+                .findById(aid)
                 .ifPresent((address) -> {
-                    repositoryAddress.delete(address);
+                    addressRepository.delete(address);
                     response.put("data", true);
                 });
         return response;
@@ -66,12 +67,13 @@ public class DaoAddress implements ServiceAddress<Address> {
     public Map<String, Boolean> update(Address obj, Long aid) {
         Map<String, Boolean> response = new HashMap<>();
         response.put("data", false);
-        repositoryAddress.findById(aid)
+        addressRepository
+                .findById(aid)
                 .ifPresent((address) -> {
                     address.set_country(obj.get_country());
                     address.set_city(obj.get_city());
                     address.set_details(obj.get_details());
-                    repositoryAddress.save(address);
+                    addressRepository.save(address);
                     response.put("data", true);
                 });
         return response;

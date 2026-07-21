@@ -2,7 +2,7 @@ package com.ttknpdev.understandhowtoworkwithangular.controller;
 
 import com.ttknpdev.understandhowtoworkwithangular.entities.one.Employee;
 import com.ttknpdev.understandhowtoworkwithangular.log.Logging;
-import com.ttknpdev.understandhowtoworkwithangular.services.ServiceEmployee;
+import com.ttknpdev.understandhowtoworkwithangular.services.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/employee")
 public class EndPointEmployee {
 
-    private final ServiceEmployee<Employee> serviceEmployee;
+    private final EmployeeService<Employee> employeeService;
 
     @Autowired
-    public EndPointEmployee(ServiceEmployee<Employee> serviceEmployee) {
-        this.serviceEmployee = serviceEmployee;
+    public EndPointEmployee(EmployeeService<Employee> employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping(value = "/reads")
     private ResponseEntity<?> reads() {
-        Iterable<Employee> employees = serviceEmployee.reads();
+        Iterable<Employee> employees = employeeService.reads();
         Logging.endpointEmployee.warn("endpoint \"/reads\" is calling");
         return ResponseEntity
                 .accepted()
@@ -29,7 +29,7 @@ public class EndPointEmployee {
     }
     @GetMapping(value = "/reads/only")
     private ResponseEntity<?> readsOnlyEmployee() {
-        Iterable<Employee> employees = serviceEmployee.readsOnlyEmployee();
+        Iterable<Employee> employees = employeeService.readsOnlyEmployee();
         Logging.endpointEmployee.warn("endpoint \"/reads/only\" is calling");
         return ResponseEntity
                 .accepted()
@@ -40,28 +40,28 @@ public class EndPointEmployee {
         Logging.endpointEmployee.warn("endpoint \"/read/{eid}\" is calling");
         return ResponseEntity
                 .accepted()
-                .body(serviceEmployee.read(eid));
+                .body(employeeService.read(eid));
     }
     @PostMapping(value = "/create")
     private ResponseEntity<?> create(@RequestBody Employee employee) {
         Logging.endpointEmployee.warn("endpoint \"/create\" is calling");
         return ResponseEntity
                 .accepted()
-                .body(serviceEmployee.create(employee));
+                .body(employeeService.create(employee));
     }
 
     @DeleteMapping(value = "/delete/{eid}")
     private ResponseEntity<?> delete(@PathVariable Long eid) {
         Logging.endpointEmployee.warn("endpoint \"/delete/{eid}\" is calling");
         return ResponseEntity
-                .ok(serviceEmployee.delete(eid));
+                .ok(employeeService.delete(eid));
     }
 
     @PutMapping(value = "/update/{eid}")
     private ResponseEntity<?> update(@RequestBody Employee employee,@PathVariable Long eid) {
         Logging.endpointEmployee.warn("endpoint \"/update/{eid}\" is calling");
         return ResponseEntity
-                .ok(serviceEmployee.update(employee,eid));
+                .ok(employeeService.update(employee,eid));
     }
 
 }
